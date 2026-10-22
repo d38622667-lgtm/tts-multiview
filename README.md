@@ -5,7 +5,7 @@
 ¹ Sun Yat-sen University  
 ² Kling Team, Kuaishou Technology
 
-[**Paper (PDF)**](assets/paper.pdf) · [**Website deployment guide (中文)**](GETTING_STARTED_ZH.md)
+[**Paper (PDF)**](assets/paper.pdf)
 
 ## Overview
 
