@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f8f9fd">
-  <meta name="description" content="Test-Time Scaling for Multi-View Diffusion Models: Generation, Verification, and Search. A research project on DINO-centroid verification and Exploration–Refinement Search.">
+  <meta name="description" content="Multi-View Diffusion under Test-Time Scaling. Exploring generation, DINO-centroid verification, and Exploration–Refinement Search.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Test-Time Scaling for Multi-View Diffusion Models">
+  <meta property="og:title" content="Multi-View Diffusion under Test-Time Scaling">
   <meta property="og:description" content="Generation, Verification, and Search — exploiting cross-view structure through consensus verification and targeted refinement.">
-  <title>Test-Time Scaling for Multi-View Diffusion Models</title>
+  <title>Multi-View Diffusion under Test-Time Scaling</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -37,14 +37,18 @@
       <div class="container hero-inner">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dot"></span> RESEARCH PROJECT <span class="eyebrow-line"></span> MULTI-VIEW GENERATION</div>
-          <h1 id="hero-heading">Test-Time Scaling for <span class="gradient-text">Multi-View</span> Diffusion Models</h1>
+          <h1 id="hero-heading">Multi-View Diffusion <span class="gradient-text">under Test-Time Scaling</span></h1>
           <p class="hero-subtitle">Generation, Verification, and Search</p>
+          <div class="paper-authors" aria-label="Authors and affiliations">
+            <div class="author-names"><span>Danlin Li<sup>1</sup></span><span>Qing Zhang<sup>1</sup></span><span>Jianmin Bao<sup>2</sup></span><span>Zhen Wang<sup>1</sup></span><span>Yutong Lu<sup>1</sup></span></div>
+            <div class="affiliations"><span><sup>1</sup> Sun Yat-sen University</span><span><sup>2</sup> Kling Team, Kuaishou Technology</span></div>
+          </div>
           <p class="hero-lede">How can we spend additional inference compute effectively when generated views must remain consistent? We study the interplay of <strong>joint generation</strong>, <strong>cross-sample verification</strong>, and <strong>targeted refinement</strong>.</p>
           <div class="actions">
             <a class="btn btn-primary" href="assets/paper.pdf" target="_blank" rel="noopener"><span class="btn-icon">↗</span> Read the paper</a>
             <a class="btn btn-outline" href="#method">Explore E-R Search <span aria-hidden="true">↓</span></a>
           </div>
-          <p class="hero-note">Anonymous project page · Based on the submitted manuscript</p>
+          <p class="hero-note">Project page · Figures and results from the author-named manuscript</p>
         </div>
         <div class="hero-visual">
           <div class="hero-visual-top"><span class="visual-label"><i></i> THE CENTRAL IDEA</span><span class="mono">EXPLORE → VERIFY → REFINE</span></div>
@@ -56,7 +60,7 @@
             <div class="micro-stage"><span class="stage-symbol">↻</span><b>Refine</b><small>Regenerate only<br>uncertain views</small></div>
           </div>
           <div class="visual-rule"></div>
-          <img class="hero-chart" src="assets/figures/practical-search.webp" alt="Paper Figure 8: E-R Search achieves higher LPIPS improvements than search baselines across Easy, Normal, and Hard subsets." width="1221" height="462" fetchpriority="high">
+          <img class="hero-chart" src="assets/figures/practical-search.webp" alt="Paper Figure 8: E-R Search achieves higher LPIPS improvements than search baselines across Easy, Normal, and Hard subsets." width="1407" height="519" fetchpriority="high">
           <div class="hero-visual-bottom"><span>Practical verification · Figure 8</span><span>LPIPS gain ↑</span></div>
         </div>
       </div>
@@ -80,7 +84,7 @@
         </div>
         <div class="frame figure-main">
           <div class="frame-label"><span class="figure-no">FIG. 01</span><span>Generation · Verification · E-R Search</span></div>
-          <img src="assets/figures/overview.webp" alt="Figure 1 from the paper, illustrating per-view versus joint generation, set-level versus view-level verification, and exploration-refinement search." width="1215" height="702" loading="lazy">
+          <img src="assets/figures/overview.webp" alt="Figure 1 from the paper, illustrating per-view versus joint generation, set-level versus view-level verification, and exploration-refinement search." width="1419" height="870" loading="lazy">
           <p class="figure-caption">The interplay between the generation paradigm, verification granularity, and test-time search strategy. Source: Paper, Figure 1.</p>
         </div>
         <div class="three-questions">
@@ -100,15 +104,15 @@
         </div>
         <div class="insight-block">
           <div class="insight-copy"><div class="number-tile">01</div><h3>Joint generation shows stronger Oracle scaling.</h3><p>Across the evaluated model families, joint multi-view models exhibit larger relative LPIPS improvements from additional candidate samples under view-level Oracle selection.</p><p class="text-note">The comparison is observational: models also differ in backbone and training distribution.</p></div>
-          <figure class="paper-image"><img src="assets/figures/generation-scaling.webp" width="1215" height="474" loading="lazy" alt="Figure 2 comparing LPIPS scaling gains for per-view and joint generation."><figcaption>Figure 2 · Generation scaling</figcaption></figure>
+          <figure class="paper-image"><img src="assets/figures/generation-scaling.webp" width="1407" height="585" loading="lazy" alt="Figure 2 comparing LPIPS scaling gains for per-view and joint generation."><figcaption>Figure 2 · Generation scaling</figcaption></figure>
         </div>
         <div class="insight-block reverse">
           <div class="insight-copy"><div class="number-tile">02</div><h3>Choosing the best view can break the best set.</h3><p>Under practical verification, selecting a complete jointly generated set outperforms independently composing views. MEt3R measurements show that view composition consistently worsens cross-view coherence.</p><p class="text-note">Oracle view selection reverses the reconstruction-quality trend, exposing opportunities for localized improvement.</p></div>
-          <figure class="paper-image"><img src="assets/figures/selection-consistency.webp" width="1215" height="393" loading="lazy" alt="Figure 5: MEt3R consistency degradation caused by view-level composition."><figcaption>Figure 5 · Cross-view consistency</figcaption></figure>
+          <figure class="paper-image"><img src="assets/figures/selection-consistency.webp" width="1407" height="462" loading="lazy" alt="Figure 5: MEt3R consistency degradation caused by view-level composition."><figcaption>Figure 5 · Cross-view consistency</figcaption></figure>
         </div>
         <div class="insight-block">
           <div class="insight-copy"><div class="number-tile">03</div><h3>Cross-sample consensus gets better with more samples.</h3><p>DINO-centroid averages normalized DINO representations for corresponding viewpoints. Its centroid moves closer to the ground-truth feature as the candidate pool grows in the evaluated settings.</p><p class="text-note">This motivates a low-cost verifier for both set selection and uncertain-view detection.</p></div>
-          <figure class="paper-image"><img src="assets/figures/feature-consensus.webp" width="1206" height="420" loading="lazy" alt="Figure 4: DINO-centroid similarity to GT features rises with sample count."><figcaption>Figure 4 · Feature-space consensus</figcaption></figure>
+          <figure class="paper-image"><img src="assets/figures/feature-consensus.webp" width="1407" height="519" loading="lazy" alt="Figure 4: DINO-centroid similarity to GT features rises with sample count."><figcaption>Figure 4 · Feature-space consensus</figcaption></figure>
         </div>
       </div>
     </section>
@@ -142,7 +146,7 @@
           <div class="chart-footer"><span><i class="legend-chip legend-bon"></i> Best-of-N <i class="legend-chip legend-er"></i> E-R Search</span><span>Source: Paper, Figure 8 · Scale fixed to 14%</span></div>
         </div>
         <div class="results-columns">
-          <div class="result-pane"><div class="result-header"><h3>Verification that scales</h3><p>DINO-centroid provides a low-cost practical ranking signal across sampling budgets and object difficulty.</p></div><img src="assets/figures/verifier-comparison.webp" width="1218" height="405" loading="lazy" alt="Figure 3: DINO-centroid compared with other practical verifiers across 4, 16, and 64 candidates."><small>Figure 3 · Practical verifier comparison</small></div>
+          <div class="result-pane"><div class="result-header"><h3>Verification that scales</h3><p>DINO-centroid provides a low-cost practical ranking signal across sampling budgets and object difficulty.</p></div><img src="assets/figures/verifier-comparison.webp" width="1407" height="498" loading="lazy" alt="Figure 3: DINO-centroid compared with other practical verifiers across 4, 16, and 64 candidates."><small>Figure 3 · Practical verifier comparison</small></div>
           <div class="result-pane"><div class="result-header"><h3>Controlled view selection</h3><p>Under identical refinement settings, DINO-based uncertain-view identification improves over random selection.</p></div><div class="mini-table"><div class="table-title">Normal split · N=64 · LPIPS gain</div><div class="mini-row"><span>Random selection</span><b>9.02%</b></div><div class="mini-row highlight-row"><span>DINO-centroid</span><b>11.60%</b></div><div class="mini-row"><span>Oracle selection</span><b>12.05%</b></div></div><small>Source: Appendix L, Table 7</small></div>
         </div>
         <div class="reconstruction-block"><div class="recon-copy"><span class="tiny-index">DOWNSTREAM VALIDATION</span><h3>Improvements extend to 3D reconstruction.</h3><p>Using the same reconstruction pipeline on the Normal subset, E-R Search improves both geometric metrics over the frozen SyncDreamer baseline and Best-of-N selection.</p></div><div class="recon-table-wrapper"><table class="recon-table"><thead><tr><th>Method</th><th>Chamfer ↓</th><th>Volume IoU ↑</th></tr></thead><tbody><tr><td>SyncDreamer</td><td>0.0274</td><td>0.537</td></tr><tr><td>Best-of-N</td><td>0.0265</td><td>0.551</td></tr><tr class="best-row"><td>E-R Search</td><td>0.0252</td><td>0.568</td></tr></tbody></table><div class="caption-small">Source: Appendix K, Table 6</div></div></div>
@@ -151,15 +155,15 @@
 
     <section class="section examples-section" id="examples" aria-labelledby="examples-heading">
       <div class="container">
-        <div class="section-header center"><span class="kicker">05 / QUALITATIVE EXAMPLES</span><h2 id="examples-heading">Preserve what works. <em>Refine what does not.</em></h2><p>Example cases from the paper compare the ground truth, an unselected set, the verifier-selected set, and the result after targeted refinement.</p></div>
-        <div class="examples-grid"><figure class="example-card"><img src="assets/figures/case-one.webp" alt="Qualitative example with a multicolored object across different generated viewpoint sets and refinement." width="990" height="705" loading="lazy"><figcaption><b>Case study 01</b><span>Verification-guided refinement</span></figcaption></figure><figure class="example-card"><img src="assets/figures/case-two.webp" alt="Qualitative example with a small green object, comparing selected and refined multi-view sets." width="990" height="675" loading="lazy"><figcaption><b>Case study 02</b><span>Reliable views retained as observations</span></figcaption></figure></div>
+        <div class="section-header center"><span class="kicker">05 / QUALITATIVE CASE STUDY</span><h2 id="examples-heading">Preserve what works. <em>Refine what does not.</em></h2><p>The first case study from Figure 12 compares the input image, ground truth, an unselected set, the verifier-selected set, and the result after targeted refinement. Red outlines mark uncertain views; green outlines mark reliable views.</p></div>
+        <div class="examples-grid single-case"><figure class="example-card"><img src="assets/figures/case-one.webp" alt="First case study from Figure 12: colorful multicomponent object showing the input image and ground truth, unselected, selected and refined sets, with red and green selection outlines." width="1215" height="792" loading="lazy"><figcaption><b>Case study 01</b><span>Figure 12 (first example) · Verification-guided refinement</span></figcaption></figure></div>
         <div class="readmore"><span>Want the complete experimental setup, additional analyses, and implementation details?</span><a href="assets/paper.pdf" target="_blank" rel="noopener">Explore the full paper ↗</a></div>
       </div>
     </section>
 
     <section class="closing-section" id="resources"><div class="container closing-container"><div><span class="kicker light">RESOURCES</span><h2>Read the full research.</h2><p>Detailed formulations, controlled experiments, implementation settings, and supplementary results are available in the manuscript.</p></div><div class="resource-actions"><a href="assets/paper.pdf" class="btn btn-white" target="_blank" rel="noopener">Open PDF <span aria-hidden="true">↗</span></a><span class="coming-soon" aria-label="No public code link is provided">Code link not provided</span></div></div></section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><span>Test-Time Scaling for Multi-View Diffusion Models</span><span>Paper figures and experimental values reproduced from the supplied manuscript.</span><a href="#top" aria-label="Back to top">Back to top ↑</a></div></footer>
+  <footer class="site-footer"><div class="container footer-inner"><span>Multi-View Diffusion under Test-Time Scaling</span><span>Paper figures and experimental values reproduced from the supplied manuscript.</span><a href="#top" aria-label="Back to top">Back to top ↑</a></div></footer>
   <script src="assets/main.js" defer></script>
 </body>
 </html>

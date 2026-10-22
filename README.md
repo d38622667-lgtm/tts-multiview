@@ -1,6 +1,6 @@
-# Test-Time Scaling for Multi-View Diffusion Models — Project Website
+# Multi-View Diffusion under Test-Time Scaling — Project Website
 
-An **English-language, responsive academic project website** for the supplied paper, *Test-Time Scaling for Multi-View Diffusion Models: Generation, Verification, and Search*. All reported numeric results and figures originate from the manuscript. No author identities, code repository URLs, videos, or unpublished results are invented.
+An **English-language, responsive academic project website** for the supplied paper, *Multi-View Diffusion under Test-Time Scaling*. All reported numeric results and figures originate from the manuscript. Authors and affiliations are taken from the new author-named manuscript. No code repository URLs, videos, or unpublished results are invented.
 
 ## Website files
 
@@ -9,12 +9,12 @@ index.html                         # Main page — edit text, buttons, section l
 assets/style.css                   # Colors, typography, responsive layout
 assets/main.js                     # Interactive N=4/16/64 LPIPS bars
 assets/favicon.svg                 # Small browser icon
-assets/paper.pdf                   # Anonymous manuscript provided by user
+assets/paper.pdf                   # Author-named arXiv manuscript provided by user
 assets/figures/*.webp              # Cropped original figures from the manuscript
 .nojekyll                          # Disable GitHub Pages Jekyll processing
 ```
 
-The site is *pure static HTML/CSS/JS*. You do not need Node.js, npm, Python, GitHub Actions, or a paid host.
+This version displays **only the first case study** from Figure 12 and excludes `case-two.webp`. The site is *pure static HTML/CSS/JS*. You do not need Node.js, npm, Python, GitHub Actions, or a paid host.
 
 ## A. Fastest publishing method (web browser only)
 
@@ -22,7 +22,7 @@ The site is *pure static HTML/CSS/JS*. You do not need Node.js, npm, Python, Git
 2. Choose **New repository** (or the `+` menu → **New repository**).
 3. Repository name: `tts-multiview` (you may choose any available name). Make it **Public** for ordinary free GitHub Pages hosting. Select **Create repository**.
 4. Open the repository's **Add file → Upload files** page.
-5. Extract this ZIP on your computer. Upload **the contents inside `tts-multiview-site/`**, not the enclosing directory. `index.html` must be in the repository root. GitHub's browser drag-and-drop may not preserve nested folders reliably; use the web interface's folder-aware upload where supported, or use the Git method below (recommended for reliable uploads).
+5. Extract this ZIP on your computer. Upload **the contents inside `tts-multiview-site-arxiv/`**, not the enclosing directory. `index.html` must be in the repository root. GitHub's browser drag-and-drop may not preserve nested folders reliably; use the web interface's folder-aware upload where supported, or use the Git method below (recommended for reliable uploads).
 6. Commit the files.
 7. Open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**. Branch: `main`. Folder: `/(root)`. Click **Save**.
 8. Wait for GitHub Pages to finish deployment, then visit:
@@ -55,7 +55,7 @@ If Git asks for authentication, use Git Credential Manager, GitHub CLI (`gh auth
 ## C. Edit or add content
 
 - **Project title & abstract:** Edit `index.html`, in the hero and overview sections.
-- **Authors and organizations:** The released page deliberately omits identifying information during double-blind review. Add only after the anonymity restriction no longer applies and you are ready to disclose identities.
+- **Authors and organizations:** This version displays the author names and affiliations already public in the provided manuscript. Check the review anonymity requirements before making this site public.
 - **Paper:** Replace `assets/paper.pdf` with the exact public version you intend to share.
 - **Code:** In `index.html`, locate `Code link not provided`, then replace the text with an `<a href="https://github.com/...">Code ↗</a>` element once a link is public.
 - **Video:** Add your own video file or approved embed as a new section in `index.html` if desired (currently no demo is claimed).
@@ -85,7 +85,7 @@ Then open `http://localhost:8000/` and verify desktop/mobile layout, navigation,
 
 ## E. Double-blind review warning
 
-The supplied manuscript is labelled **under review at ICLR 2027**. Its author guidelines permit anonymized supplementary demo links subject to anonymity requirements, but a site hosted on a personally identifying GitHub account or linking author profiles may compromise anonymity. Do **not** assume an anonymous page is sufficient merely because it omits author names; GitHub account ownership, commit attribution, tracking scripts, and repository links may identify authors. Choose whether and when to publish according to the official [ICLR 2027 Author Guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines) and any relevant venue-specific policies. This package is anonymized by default, but GitHub hosting choices remain your responsibility.
+The supplied PDF is an **author-named manuscript**, and the site now publicly shows the author names and institutions. If you still need a fully anonymous project page for a review process, do not publish this version; use an appropriately anonymized site and PDF instead. A public GitHub Pages site can reveal contributor identities.
 
 ## F. Common errors
 
@@ -98,3 +98,13 @@ The supplied manuscript is labelled **under review at ICLR 2027**. Its author gu
 ---
 
 This package reproduces figures from the paper and is intended to be managed by the authors or with their authorization. Do not add claims of public code or acceptance until those facts are true.
+
+## Updating an existing GitHub Pages repository (no Git required)
+
+1. Extract the ZIP and open your existing GitHub repository.
+2. Click **Add file → Upload files**, then upload the *contents* of the extracted folder, keeping `index.html` in the repository root and preserving the `assets/` subfolders. Existing files with the same paths should be overwritten in the new commit.
+3. Click **Commit changes**. The Pages site updates after deployment.
+4. The old file `assets/figures/case-two.webp` may remain in your repository. It is no longer referenced or displayed, but you can open its file page and choose **Delete file → Commit changes** to remove it completely.
+5. `.nojekyll` is optional for this all-static page. If GitHub says the file is hidden during upload, skip it.
+
+**Warning:** replacing `index.html` or `assets/paper.pdf` without committing them into the correct folder won't update the live website.

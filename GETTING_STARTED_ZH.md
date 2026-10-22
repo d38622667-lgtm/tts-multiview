@@ -1,12 +1,12 @@
 # GitHub Pages 项目主页：中文部署指南
 
-项目名称：**Test-Time Scaling for Multi-View Diffusion Models: Generation, Verification, and Search**
+项目名称：**Multi-View Diffusion under Test-Time Scaling**
 
 这套页面已经制作好，不需要你自己写代码，也不需要服务器、Node.js、框架或付费域名。网页采用英文内容以适合国际学术项目展示，部署说明使用中文。
 
 ## 0. 部署前最重要的提醒：匿名审稿
 
-提供的 PDF 是 **ICLR 2027 匿名审稿版本**。页面没有真实作者、单位、个人主页或代码仓库信息。但如果你把它部署在个人 GitHub 账号下，这个 GitHub 账号和 Git 提交元数据仍可能揭露身份。请先确认当前审稿阶段的公开政策以及你打算如何对外分享。ICLR 2027 官方规则允许符合匿名要求的演示链接，但匿名要求包括站点本身和相关链接，不只是去掉作者名字。项目也不应添加会记录访问者身份的分析脚本。
+新 PDF 是**包含真实作者和单位的 arXiv 稿件版本**，网页也已根据 PDF 展示作者姓名和单位。请注意：如果仍然需要匿名投稿/审稿专用网页，不要直接公开这一版，因为它将公开作者身份。
 
 详情：https://iclr.cc/Conferences/2027/AuthorGuidelines
 
@@ -95,7 +95,7 @@ https://YOUR_USERNAME.github.io/
 | 图表与案例图片 | `assets/figures/` |
 
 - 改代码仓库链接：等代码仓库公开后，在 `index.html` 搜索 `Code link not provided`，改成真正的链接。不要在代码未公开时放虚假链接。
-- 改论文作者：目前未显示作者，等审稿匿名要求不再适用再添加。
+- 改论文作者：目前已经按新 PDF 显示作者和单位。若需要匿名网页，请删除作者栏且替换 PDF 为匿名版本。
 - 改论文版本：把你的最新合法公开版本复制为 `assets/paper.pdf`，覆盖旧文件。
 - 添加演示视频：可以把 `demo.mp4` 加入 `assets/`，然后在 HTML 中增加 `<video controls src="assets/demo.mp4"></video>`；大文件需要考虑 Pages 的托管限制。
 
@@ -133,6 +133,18 @@ python -m http.server 8000
 
 ## 8. 发布之后的推荐事项
 
-确认匿名政策允许后，可添加作者、机构和个人主页；代码公开后添加对应仓库；有定性视频后增加演示；有 arXiv 正式版再替换 `paper.pdf` 并增加公开论文链接。保持论文版本、实验指标与网站一致。
+新版本已替换 `paper.pdf`，更新作者信息与标题，并且 Case Study 仅保留 Figure 12 的第一组案例。代码公开后可添加真实仓库链接；请勿编造未公开的项目地址。
 
 官方 GitHub Pages 文档：https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
+
+
+## 7. 已有 GitHub 仓库：如何手动更新为本版本（无须安装 Git）
+
+1. 下载本次新的 `tts-multiview-site-arxiv.zip`，解压。
+2. 进入你原来用于 GitHub Pages 的仓库，在 **Code → Add file → Upload files** 中上传解压文件夹的**内部全部内容**。注意 `index.html` 必须处于仓库根目录，`assets/` 的层级不能变化。
+3. 在网页底部选择 **Commit changes**。同名文件会被本次上传的新版本覆盖。
+4. 原仓库的 `assets/figures/case-two.webp` 不会被新上传的 ZIP 自动删除。但新版页面不会引用它。如需彻底删除，可进入该文件，点击右上角的删除按钮（Delete file），提交更改。
+5. `.nojekyll` 文件可选。如果网页上传提示 **This file is hidden**，直接跳过，不影响本站点。
+6. 进入 **Settings → Pages** 检查部署成功，再刷新你的 `.github.io` 地址。
+
+更新的内容包括：论文 PDF、正式标题、作者与单位、论文原版图表，以及**仅展示第一组 Case Study**。
