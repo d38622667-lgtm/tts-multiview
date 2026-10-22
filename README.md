@@ -1,110 +1,47 @@
-# Multi-View Diffusion under Test-Time Scaling — Project Website
+# Multi-View Diffusion under Test-Time Scaling
 
-An **English-language, responsive academic project website** for the supplied paper, *Multi-View Diffusion under Test-Time Scaling*. All reported numeric results and figures originate from the manuscript. Authors and affiliations are taken from the new author-named manuscript. No code repository URLs, videos, or unpublished results are invented.
+**Danlin Li¹ · Qing Zhang¹ · Jianmin Bao² · Zhen Wang¹ · Yutong Lu¹**
 
-## Website files
+¹ Sun Yat-sen University  
+² Kling Team, Kuaishou Technology
 
-```text
-index.html                         # Main page — edit text, buttons, section layout
-assets/style.css                   # Colors, typography, responsive layout
-assets/main.js                     # Interactive N=4/16/64 LPIPS bars
-assets/favicon.svg                 # Small browser icon
-assets/paper.pdf                   # Author-named arXiv manuscript provided by user
-assets/figures/*.webp              # Cropped original figures from the manuscript
-.nojekyll                          # Disable GitHub Pages Jekyll processing
-```
+[**Paper (PDF)**](assets/paper.pdf) · [**Website deployment guide (中文)**](GETTING_STARTED_ZH.md)
 
-This version displays **only the first case study** from Figure 12 and excludes `case-two.webp`. The site is *pure static HTML/CSS/JS*. You do not need Node.js, npm, Python, GitHub Actions, or a paid host.
+## Overview
 
-## A. Fastest publishing method (web browser only)
+How should we allocate additional inference computation when generated views must remain consistent?
 
-1. Sign in to [GitHub](https://github.com).
-2. Choose **New repository** (or the `+` menu → **New repository**).
-3. Repository name: `tts-multiview` (you may choose any available name). Make it **Public** for ordinary free GitHub Pages hosting. Select **Create repository**.
-4. Open the repository's **Add file → Upload files** page.
-5. Extract this ZIP on your computer. Upload **the contents inside `tts-multiview-site-arxiv/`**, not the enclosing directory. `index.html` must be in the repository root. GitHub's browser drag-and-drop may not preserve nested folders reliably; use the web interface's folder-aware upload where supported, or use the Git method below (recommended for reliable uploads).
-6. Commit the files.
-7. Open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**. Branch: `main`. Folder: `/(root)`. Click **Save**.
-8. Wait for GitHub Pages to finish deployment, then visit:
-   `https://YOUR_GITHUB_USERNAME.github.io/tts-multiview/`
+We systematically study **test-time scaling (TTS) for multi-view diffusion models** from three perspectives: **generation**, **verification**, and **search**. We introduce **DINO-centroid**, a lightweight, cross-sample consensus verifier, and **Exploration–Refinement Search (E-R Search)**, which preserves reliable views and conditionally regenerates uncertain views with a frozen multi-view diffusion model.
 
-If the repository was created as `YOUR_GITHUB_USERNAME.github.io` (a user site), the URL is instead `https://YOUR_GITHUB_USERNAME.github.io/`.
+![Generation, verification, and exploration–refinement search](assets/figures/overview.webp)
 
-Official docs: [Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) and [Configuring a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+## Key findings
 
-## B. Recommended: publish with Git on your own computer
+- **Generation:** Joint multi-view models show stronger Oracle scaling than the evaluated independent per-view models.
+- **Verification:** Set-level selection preserves cross-view consistency, while view-level scoring identifies opportunities for improvement. DINO-centroid estimates candidate quality using feature consensus across generations.
+- **Search:** E-R Search balances complete-set exploration and targeted view regeneration under matched inference budgets.
 
-1. Install [Git](https://git-scm.com/downloads), sign in to GitHub, and create a repository called `tts-multiview`.
-2. Extract the ZIP and open a terminal **inside the folder containing `index.html`**.
-3. Run:
+## Results
 
-```bash
-git init
-git add .
-git commit -m "Add multi-view TTS project page"
-git branch -M main
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/tts-multiview.git
-git push -u origin main
-```
+LPIPS improvement over single-sample generation on GSO with **N = 64** (higher is better):
 
-4. Open the repository → **Settings → Pages** → **Deploy from a branch**, select `main` and `/(root)`, then save.
-5. Open `https://YOUR_GITHUB_USERNAME.github.io/tts-multiview/` once the build finishes.
+| Method | Easy | Normal | Hard |
+| :--- | ---: | ---: | ---: |
+| Best-of-N | 4.86% | 8.21% | 5.74% |
+| **E-R Search** | **8.11%** | **11.60%** | **8.98%** |
 
-If Git asks for authentication, use Git Credential Manager, GitHub CLI (`gh auth login`), or an authorized personal access token — **not** the GitHub account password in the terminal prompt. If your remote has an existing README commit, clone the newly created repo first or reconcile history rather than force pushing.
+![Search performance under practical verification](assets/figures/practical-search.webp)
 
-## C. Edit or add content
+In downstream 3D reconstruction on the Normal subset, E-R Search achieves **0.0252 Chamfer Distance** (lower is better) and **0.568 Volume IoU** (higher is better).
 
-- **Project title & abstract:** Edit `index.html`, in the hero and overview sections.
-- **Authors and organizations:** This version displays the author names and affiliations already public in the provided manuscript. Check the review anonymity requirements before making this site public.
-- **Paper:** Replace `assets/paper.pdf` with the exact public version you intend to share.
-- **Code:** In `index.html`, locate `Code link not provided`, then replace the text with an `<a href="https://github.com/...">Code ↗</a>` element once a link is public.
-- **Video:** Add your own video file or approved embed as a new section in `index.html` if desired (currently no demo is claimed).
-- **Metrics:** Edit both the HTML fixed text and `assets/main.js` budget values if your final camera-ready experiments change.
-- **Images:** Replace or add images under `assets/figures/`. Be sure to update matching `src` paths in `index.html`.
-- **Domain:** You can optionally configure a custom domain in GitHub Pages settings and update DNS at your domain provider.
+## Qualitative example
 
-After making local changes:
+The **first case study** from the paper is shown below. Green boxes indicate reliable views retained as observations, while red boxes indicate uncertain views targeted for refinement.
 
-```bash
-git add .
-git commit -m "Update project page"
-git push
-```
+![First case study: multi-view generation and refinement](assets/figures/case-one.webp)
 
-GitHub Pages will publish the updated version after the build completes.
+## Project website
 
-## D. Preview locally
+This repository contains the paper's static project website (`index.html`, `assets/style.css`, and `assets/main.js`). To publish it with GitHub Pages, select **Settings → Pages → Deploy from a branch → main → /(root)**.
 
-Double-click `index.html` to preview basic rendering. For a web-server preview (recommended), from the same folder run:
-
-```bash
-python -m http.server 8000
-```
-
-Then open `http://localhost:8000/` and verify desktop/mobile layout, navigation, figures, button links, and PDF access. Stop the server with `Ctrl+C`.
-
-## E. Double-blind review warning
-
-The supplied PDF is an **author-named manuscript**, and the site now publicly shows the author names and institutions. If you still need a fully anonymous project page for a review process, do not publish this version; use an appropriately anonymized site and PDF instead. A public GitHub Pages site can reveal contributor identities.
-
-## F. Common errors
-
-- **404 on website:** `index.html` not in branch root; wrong publishing branch/folder; deployment still running; URL capitalization mismatch.
-- **CSS/images 404:** Uploaded only the HTML but not `assets/`; accidentally nested an extra parent directory; asset paths were changed. Keep the directory structure intact.
-- **PDF 404:** Ensure `assets/paper.pdf` is uploaded and accessible.
-- **No Pages settings:** Check repository permissions and whether Pages is available for your repository plan/visibility.
-- **Old page after pushing:** Refresh the browser, look at the repository's Actions/Pages deployment status, and verify your commit is on the configured source branch.
-
----
-
-This package reproduces figures from the paper and is intended to be managed by the authors or with their authorization. Do not add claims of public code or acceptance until those facts are true.
-
-## Updating an existing GitHub Pages repository (no Git required)
-
-1. Extract the ZIP and open your existing GitHub repository.
-2. Click **Add file → Upload files**, then upload the *contents* of the extracted folder, keeping `index.html` in the repository root and preserving the `assets/` subfolders. Existing files with the same paths should be overwritten in the new commit.
-3. Click **Commit changes**. The Pages site updates after deployment.
-4. The old file `assets/figures/case-two.webp` may remain in your repository. It is no longer referenced or displayed, but you can open its file page and choose **Delete file → Commit changes** to remove it completely.
-5. `.nojekyll` is optional for this all-static page. If GitHub says the file is hidden during upload, skip it.
-
-**Warning:** replacing `index.html` or `assets/paper.pdf` without committing them into the correct folder won't update the live website.
+For a browser-only upload walkthrough, see **[GETTING_STARTED_ZH.md](GETTING_STARTED_ZH.md)**. No Git installation or build step is required.
