@@ -39,9 +39,3 @@ In downstream 3D reconstruction on the Normal subset, E-R Search achieves **0.02
 The **first case study** from the paper is shown below. Green boxes indicate reliable views retained as observations, while red boxes indicate uncertain views targeted for refinement.
 
 ![First case study: multi-view generation and refinement](assets/figures/case-one.webp)
-
-## Project website
-
-This repository contains the paper's static project website (`index.html`, `assets/style.css`, and `assets/main.js`). To publish it with GitHub Pages, select **Settings → Pages → Deploy from a branch → main → /(root)**.
-
-For a browser-only upload walkthrough, see **[GETTING_STARTED_ZH.md](GETTING_STARTED_ZH.md)**. No Git installation or build step is required.
